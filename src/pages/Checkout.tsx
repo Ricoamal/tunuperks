@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import { useCartStore } from '../store/cartStore';
 import { PayPalButtons } from '@paypal/react-paypal-js';
-import { loadStripe } from '@stripe/stripe-js';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-
 const Checkout = () => {
   const { items, total, clearCart } = useCartStore();
-  const [paymentMethod, setPaymentMethod] = useState<'stripe' | 'paypal'>('stripe');
+  const [paymentMethod, setPaymentMethod] = useState<'paypal'>('paypal');
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   const navigate = useNavigate();
 
@@ -27,17 +24,6 @@ const Checkout = () => {
       </div>
     );
   }
-
-  const handleStripeCheckout = async () => {
-    const stripe = await stripePromise;
-    if (!stripe) return;
-
-    // Here you would typically make an API call to your backend to create a Stripe session
-    // For demo purposes, we'll just show a success message
-    toast.success('Payment successful!');
-    clearCart();
-    navigate('/profile');
-  };
 
   const handlePayPalApprove = (data: any, actions: any) => {
     return actions.order.capture().then(() => {
@@ -56,17 +42,7 @@ const Checkout = () => {
           <div className="bg-white p-6 rounded-lg shadow mb-8">
             <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
             <div className="space-y-4">
-              <label className="flex items-center space-x-3">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="stripe"
-                  checked={paymentMethod === 'stripe'}
-                  onChange={() => setPaymentMethod('stripe')}
-                  className="form-radio"
-                />
-                <span>Credit Card (Stripe)</span>
-              </label>
+              {/* Removed Stripe option */}
               <label className="flex items-center space-x-3">
                 <input
                   type="radio"
@@ -81,14 +57,8 @@ const Checkout = () => {
             </div>
           </div>
 
-          {paymentMethod === 'stripe' ? (
-            <button
-              onClick={handleStripeCheckout}
-              className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            >
-              Pay with Stripe
-            </button>
-          ) : (
+          {/* Only PayPal button */}
+          {paymentMethod === 'paypal' && (
             <PayPalButtons
               createOrder={(data, actions) => {
                 return actions.order.create({

@@ -1,8 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from '../shared/Footer';
-import { Widget as ChatWidget } from 'react-chat-widget';
-import 'react-chat-widget/lib/styles.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import Notifications from '../shared/Notifications';
 import CookieConsent from '../shared/CookieConsent';

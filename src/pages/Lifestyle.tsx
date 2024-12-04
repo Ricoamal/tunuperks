@@ -53,7 +53,7 @@ const categories = [
     colorClass: 'bg-amber-100 text-amber-600',
     perks: [
       'Priority restaurant reservations',
-      'Special chef's table experiences',
+      'Special chef\'s table experiences',
       'Concert and show tickets'
     ]
   },
