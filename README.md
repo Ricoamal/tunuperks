@@ -44,7 +44,7 @@ This project is built using:
 - **React** for dynamic and responsive user interfaces.  
 
 ### **Payments Integrated**  
-Our platform supports payments through **Stripe** and **Bitcoin**, ensuring flexibility and accessibility for all users.  
+Our platform supports payments through **Major Cards - Stripe** and **Crypto Currency**, ensuring flexibility and accessibility for all users.  
 
 
 
